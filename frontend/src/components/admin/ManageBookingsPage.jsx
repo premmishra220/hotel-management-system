@@ -27,20 +27,20 @@ const ManageBookingsPage = () => {
     }, []);
 
     useEffect(() => {
-        filterBookings(searchTerm);
-    }, [searchTerm, bookings]);
-
-    const filterBookings = (term) => {
-        if (term === '') {
+        if (searchTerm === '') {
             setFilteredBookings(bookings);
         } else {
             const filtered = bookings.filter((booking) =>
-                booking.bookingConfirmationCode && booking.bookingConfirmationCode.toLowerCase().includes(term.toLowerCase())
+                booking.bookingConfirmationCode &&
+                booking.bookingConfirmationCode
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
             );
             setFilteredBookings(filtered);
         }
+
         setCurrentPage(1);
-    };
+    }, [searchTerm, bookings]);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -48,13 +48,17 @@ const ManageBookingsPage = () => {
 
     const indexOfLastBooking = currentPage * bookingsPerPage;
     const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-    const currentBookings = filteredBookings.slice(indexOfFirstBooking, indexOfLastBooking);
+    const currentBookings = filteredBookings.slice(
+        indexOfFirstBooking,
+        indexOfLastBooking
+    );
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className='bookings-container'>
             <h2>All Bookings</h2>
+
             <div className='search-div'>
                 <label>Filter by Booking Number:</label>
                 <input
@@ -72,10 +76,15 @@ const ManageBookingsPage = () => {
                         <p><strong>Check In Date:</strong> {booking.checkInDate}</p>
                         <p><strong>Check out Date:</strong> {booking.checkOutDate}</p>
                         <p><strong>Total Guests:</strong> {booking.totalNumOfGuest}</p>
+
                         <button
                             className="edit-room-button"
-                            onClick={() => navigate(`/admin/edit-booking/${booking.bookingConfirmationCode}`)}
-                        >Manage Booking</button>
+                            onClick={() =>
+                                navigate(`/admin/edit-booking/${booking.bookingConfirmationCode}`)
+                            }
+                        >
+                            Manage Booking
+                        </button>
                     </div>
                 ))}
             </div>

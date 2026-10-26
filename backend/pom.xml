@@ -49,10 +49,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- MySQL -->
+        <!-- PostgreSQL Database (For Supabase) -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
 
@@ -100,7 +100,6 @@
             <scope>runtime</scope>
         </dependency>
 
-       
         <!-- Cloudinary -->
         <dependency>
             <groupId>com.cloudinary</groupId>
